@@ -19,13 +19,59 @@ Why choose it?
 	- Flexibility provided with project configurations
 	- Locators auto-waiting and retry-ability
 
-playwright.config.ts
+
+https://github.com/LinkedInLearning/learning-playwright-5911873/blob/01_01/RESOURCES.md 	-- GitHub repo
+
+:playwright.config.ts:
+
+defineConfig.....
+
 	-- It is automatic generated 
 	-- fullyParallel: true, 						-- this option allows multiple test files to be run in parallel.
-	-- retries: process.env.CI ? 2 : 1, 			-- how many retries we want to attempt based on the values we add for retries It means retry on CI 2 times and locally 1 time
+	-- retries: process.env.CI ? 2 : 1, 			-- how many retries we want to attempt based on the values we add for retries It means retry on CI 2 times and locally 1 time.
 
 https://playwright.dev/docs/api/class-testconfig 	-- There are some different options can be available within the playwright docs under the test config class.
+https://playwright.dev/docs/test-configuration 		-- There are some lower level configuration options can be available within the playwright docs under the test config class.
 
+
+: Use Section : 
+
+	-- timeout: 30_000, 							-- this is test time out 30Sec
+	-- globalTimeout : 10 * 60 * 1000, 				-- testsuite time out 10 min
+	-- reporter: 'html'								-- HTML test report
+	-- baseURL: 'https://google.com'				-- Our test URL
+	-- teace: 'on',
+	-- actionTimeout: 0,
+	-- ignoreHTTPSErrors: true,
+	-- video: 'retain-on-failure',
+	-- screenshot: 'only-on-failure'
+	-- headless: true, 								-- true means not open browser and test , false means it open the browser and test
+
+Project : [
+{
+	name: "setup",
+	tetsMatch:/.*\.setup\.ts/,
+},
+{
+	name: 'chromium',
+	dependencies: ["setup"],
+	use: {...devices['Desktop Chrome'], permissions: ["clipboard-read"]},
+},
+{
+	name: 'firefox',
+	dependencies: ["setup"],
+	use: {...devices['Desktop firefox']}
+},
+{
+	name: 'webkit',
+	dependencies: ["setup"],
+	use: {...devices['Desktop safari']}
+},
+]
+
+https://playwright.dev/docs/release-notes#browser-versions 		-- Browser version release notes
+
+https://playwright.dev/docs/api/class-testproject#test-project-test-match 	-- testMatch 
 
 
 utils.py -- common utilities files
