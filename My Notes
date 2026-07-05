@@ -1,0 +1,38 @@
+Playwright
+
+What is Playwright ?
+	It is an open source tool build by Microsoft that enables reliable end to end UI and API automation testing for modern web apps.
+	Highly rated on GitHub
+	An out-of-process automation driver that is not limited by the scope of in-page javascript execution
+	closer to selenium WebDriver than cypress
+
+What is Playwright Test?
+	- Built-in test runner with similar syntax to Jest
+	- Ability to run tests in parallel with the ability to enable retries
+	- Useful built in reporters with screenshots, videos and trace viewer
+	- VS COde extension to help in building and maintaining your tests
+
+Why choose it?
+	- The ability to run API/UI regression tests in the same framework
+	- The rich feature set that comes built in to Playwright
+	- Excellent error handling when tests fail
+	- Flexibility provided with project configurations
+	- Locators auto-waiting and retry-ability
+
+playwright.config.ts
+	-- It is automatic generated 
+	-- fullyParallel: true, 						-- this option allows multiple test files to be run in parallel.
+	-- retries: process.env.CI ? 2 : 1, 			-- how many retries we want to attempt based on the values we add for retries It means retry on CI 2 times and locally 1 time
+
+https://playwright.dev/docs/api/class-testconfig 	-- There are some different options can be available within the playwright docs under the test config class.
+
+
+
+utils.py -- common utilities files
+conf.py  -- configurations 
+
+Function
+module
+session
+
+
