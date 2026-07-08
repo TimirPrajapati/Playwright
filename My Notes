@@ -69,9 +69,70 @@ Project : [
 },
 ]
 
-https://playwright.dev/docs/release-notes#browser-versions 		-- Browser version release notes
-
+https://playwright.dev/docs/release-notes#browser-versions 					-- Browser version release notes
 https://playwright.dev/docs/api/class-testproject#test-project-test-match 	-- testMatch 
+
+
+https://playwright.dev/docs/test-cli 										-- test run using CLI
+
+npx playeright test --headed
+npx playwright test --project chromium
+npx playwright test --project chromium --project firefox
+npx playwright test --project "*omium"
+
+
+package.json file 	
+
+npm run test:ui 				-- This is going to run the npx playwright test UI command
+
+npm init playwright@latest 		-- Running this command will walk you through the Playwright setup guide to configure your Playwright project properly.
+
+playwright.config.ts file, when set, uses a default URL for your tests to run against? 
+	-- This option, when utilized, can also be set as a variable, making it even easier to run your tests against multiple environments.
+
+Locator Strategies in Playwright : 
+	
+Playwright also able to interact with the DOM, it stands for Document Object Model.
+DOM : What is viewable when you use Chrome DevTools
+	1) Recommended built-in locators
+	2) CSS selectors, XPATH, and legacy locators
+
+
+page.getByRole()
+page.getByText()
+page.getByLabel()
+page.getByPlaceholder()
+page.getByAltText()
+page.getByTitle()
+page.getByTestID()
+
+Note : 
+	**** 	if we are interacting with or asserting against an element we need to use await syntax.		****
+
+page.getByRole()
+	await page.getByRole('button',{name:'Sign in' }).click();	-- We have role name button and we are clicking the button.
+
+Page.getByText()
+	await expext(page.getByText('Jane Doe')).toBeVisible();		-- The element within the DOM we want to interact with has text Jane Doe, we are expecting that element is visible.
+
+page.getByLabel()
+	await page.getByLabel('username').fill('email@test.com')	-- This typically useful for inputs within applications as labels are used for making websites more accessible.
+
+page.getByPlaceholder()
+
+
+page.getByTestID()
+	await page.getByTestID('nav-sign-in').click()				-- This we are using testID to click 
+
+
+CSS and matching text
+	await page.locator('article:hastext("Playwright")').click(); 
+
+Click a <button> that has either a "Login" or "Sign in" text
+	await page.locator('button:has-text("Log in"), button:has-text("Sign in")').click();
+
+Using XPath
+	await page.locator('xpath=//button').click();
 
 
 utils.py -- common utilities files
@@ -80,5 +141,4 @@ conf.py  -- configurations
 Function
 module
 session
-
 
