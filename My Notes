@@ -134,6 +134,35 @@ Click a <button> that has either a "Login" or "Sign in" text
 Using XPath
 	await page.locator('xpath=//button').click();
 
+Assertions in Playwright: https://playwright.dev/docs/test-assertions
+
+	1) Locator assertions:
+		This type of assertion is special as this type of assertion fails it automatically retries untill it either passes or it reaches the timeout.
+		Example:
+			await expect(locator).toBeVisible()
+			await expect(locator).toContainText()
+			await expect(locator).toHaveCount()
+			await expect(page).toHaveURL()
+
+
+	2) Value assertions: 
+		This type of assertion will be evaluated one time and either pass or fail.
+		This doesn't have await in syntax.
+		Example:
+			expect(value).toBe()
+			expect(value).toContain()
+			expect(value).toEqual()
+			expect(value).toBeTruthy()
+			expect(value).toHaveLength()
+
+
+
+
+
+
+
+
+
 
 utils.py -- common utilities files
 conf.py  -- configurations 
@@ -141,4 +170,9 @@ conf.py  -- configurations
 Function
 module
 session
+
+
+
+
+
 
