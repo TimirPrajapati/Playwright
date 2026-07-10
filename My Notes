@@ -155,6 +155,12 @@ Assertions in Playwright: https://playwright.dev/docs/test-assertions
 			expect(value).toBeTruthy()
 			expect(value).toHaveLength()
 
+How to structure Playwright tests:
+	test.beforeEach()
+	test.afterEach()
+
+Handling cookie authentication in Playwright:
+
 
 
 
