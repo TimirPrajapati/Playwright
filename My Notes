@@ -161,15 +161,77 @@ How to structure Playwright tests:
 
 Handling cookie authentication in Playwright:
 
+import { test as setup, expect } from "@playwright/test"
+
+setup("Create customer 01 auth", async ({ page, context }) => {
+    const email = "customer@practicesoftwaretesting.com"
+    const password = "welcome01"
+    const customer01AuthFile = ".auth/customer01.json";
+
+    await page.goto("https://practicesoftwaretesting.com/auth/login");
+
+    //fill email
+    await page.getByTestId("email").fill(email);
+    //fill password
+    await page.getByTestId("password").fill(password);
+    //click submit
+    await page.getByRole('button', { name: 'Login' }).click();
+    await expect(page.getByTestId("nav-menu")).toContainText('Jane Doe');
+    // It stores the cookie information, It creates the folder and file with all information
+    await context.storageState({ path: customer01AuthFile });
+
+});
+
+
+await expect(page.locator('[data-test="nav-sign-in"]')).toHaveText("Sign in"); 
+await expect(page.getByTestId("nav-sign-in")).toHaveText("Sign in");
+
+| Locator         | When to use            | Example                              |
+| --------------- | ---------------------- | ------------------------------------ |
+| `getByTestId()` | Stable test attributes | `data-test`, `data-testid`           |
+| `locator()`     | CSS/XPath selectors    | `[data-test="nav-sign-in"]`          |
+| `getByRole()`   | User-facing elements   | `getByRole('link',{name:'Sign in'})` |
+
+
+
+await page.waitForLoadState("networkidle"); // Wait until there are no network connections for at least 500ms.
+
+	Use when: ✅ You need the page to be fully settled.
+	Examples:
+		Screenshot testing
+		PDF generation
+		Data validation after API calls
+
+
+await page.waitForLoadState("domcontentloaded"); // Wait until the browser has loaded the HTML document and parsed the DOM.
+
+	Use when: ✅ You only need the page structure available.
+	Good for:
+		Clicking buttons
+		Checking text
+		Checking URL
+		Basic functional tests
+
+visual test:
+
+    test("visual test", async ({ page }) => {
+        await page.waitForLoadState("networkidle"); // Wait until there are no network connections for at least 500ms..
+        await expect(page).toHaveScreenshot("home-page-no-auth.png", {
+            mask: [page.getByTitle("Practice Software Testing - Toolshop")],
+        });
+    });
+
+    test("visual test authorized", async ({ page }) => {
+        await page.waitForLoadState("networkidle"); // This waits for all the network request to complete.
+        await expect(page).toHaveScreenshot("home-page-customer01.png", {
+            mask: [page.getByTitle("Practice Software Testing - Toolshop")],
+        });
+    });
 
 
 
 
-
-
-
-
-
+    
 utils.py -- common utilities files
 conf.py  -- configurations 
 
